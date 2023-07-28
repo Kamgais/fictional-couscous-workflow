@@ -1,0 +1,46 @@
+name: Lint Test Deploy Workflow
+on: [push,workflow_dispatch]
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install NodeJs
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            - name: Get code
+              uses: actions/checkout@v3
+            - name: Install Dependencies
+              run: npm ci
+            - name: Lint
+              run: npm run lint
+
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install NodeJs
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            - name: Get code
+              uses: actions/checkout@v3
+            - name: Install Dependencies
+              run: npm ci
+            - name: Run Test
+              run: npm run test
+
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install NodeJs
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            - name: Get code
+              uses: actions/checkout@v3
+            - name: Install Dependencies
+              run: npm ci
+            - name: Build Project
+              run: npm run build
+            - name: Deploy Project
+              run: echo "Deploying ..."
